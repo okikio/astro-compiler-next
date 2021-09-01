@@ -281,6 +281,28 @@ const someProps = {
   </body></html>`,
 			},
 		},
+		{
+			name: "script in <head>",
+			source: `---
+import Widget from '../components/Widget.astro';
+import Widget2 from '../components/Widget2.astro';
+---
+<html lang="en">
+  <head>
+    <script type="module" src="/regular_script.js"></script>
+  </head>`,
+			want: want{
+				imports: `import Widget from '../components/Widget.astro';
+import Widget2 from '../components/Widget2.astro';`,
+				frontmatter: "",
+				code: `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="/regular_script.js"></script>
+  </head>
+</html>`,
+			},
+		},
 	}
 
 	for _, tt := range tests {
